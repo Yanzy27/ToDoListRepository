@@ -1,3 +1,8 @@
+<?php
+require 'db.php';
+
+$tasks = $db->query("SELECT * FROM tasks ORDER BY created_at DESC")->fetchAll();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,5 +15,12 @@
     <input type="text" name="task" placeholder="Enter new task" required>
     <button type="submit">Add Task</button>
 </form>
+<ul>
+    <?php foreach ($tasks as $task): ?>
+        <li>
+            <?= htmlspecialchars($task['task']) ?>
+        </li>
+    <?php endforeach; ?>
+</ul>
 </body>
 </html>
